@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff3c4">
+  <meta name="description" content="서원초 4학년 학생들이 기부 캠페인 데이터를 분석하고 기준을 설계해 실제 기부로 실천한 과정을 기록한 아카이브입니다.">
+  <title>4학년 기부 유닛 아카이브 | DATA·ABLE</title>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#2d2d2d;--muted:#777;--paper:#fffbf0;--white:#fff;
+      --coral:#ff6b6b;--yellow:#ffb830;--mint:#4ecdc4;--green:#63c49a;--blue:#5bafe7;--purple:#9b72b0;
+      --shadow:0 12px 32px rgba(32,45,50,.11);--soft-shadow:0 6px 20px rgba(32,45,50,.09);
+      --radius:24px;--max:1120px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Noto Sans KR',sans-serif;color:var(--ink);background:var(--paper);overflow-x:hidden;word-break:keep-all}
+    button{font:inherit}.image-button{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+    img{display:block;max-width:100%}
+    a{color:inherit;text-decoration:none}
+    .progress{position:fixed;z-index:9999;left:0;top:0;width:0;height:4px;background:linear-gradient(90deg,var(--coral),var(--yellow),var(--mint),var(--blue));transition:width .08s linear}
+    .nav{height:70px;background:rgba(255,253,248,.92);backdrop-filter:blur(12px);position:sticky;top:0;z-index:1000;border-bottom:1px solid rgba(0,0,0,.05)}
+    .nav-inner{max-width:var(--max);height:100%;margin:auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:.4px}
+    .brand-heart{width:30px;height:30px;border-radius:50%;background:var(--coral);display:grid;place-items:center;color:white;font-size:.9rem}
+    .nav-links{display:flex;gap:28px;color:#666;font-size:.84rem;font-weight:700}
+    .nav-links a:hover{color:var(--coral)}
+
+    .hero{min-height:590px;background:linear-gradient(155deg,#fff3c4 0%,#c8f0ff 55%,#c8f8e8 100%);position:relative;overflow:hidden}
+    .hero::before,.hero::after{content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.25)}
+    .hero::before{width:240px;height:240px;right:-70px;top:-60px}.hero::after{width:210px;height:210px;left:-75px;bottom:-85px}
+    .hero-inner{max-width:var(--max);min-height:590px;margin:auto;padding:70px 24px;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:60px;position:relative;z-index:1}
+    .kicker{font-size:.82rem;font-weight:900;letter-spacing:2.6px;color:var(--coral);margin-bottom:18px}
+    .hero h1{font-family:'Gaegu',cursive;font-size:clamp(2.8rem,6vw,4.7rem);line-height:1.08;margin-bottom:24px}
+    .hero-copy{font-size:1.04rem;color:#555;line-height:1.95;margin-bottom:28px;max-width:580px}
+    .hero-badge{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--coral);font-size:.84rem;font-weight:900;padding:11px 20px;border-radius:100px;box-shadow:var(--soft-shadow)}
+    .jar{width:370px;height:390px;margin:auto;position:relative;background:rgba(255,255,255,.92);border:7px solid var(--mint);border-radius:62px 62px 54px 54px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .jar::before{content:"";position:absolute;width:240px;height:80px;top:-45px;border-radius:24px;background:var(--ink);box-shadow:0 8px 16px rgba(0,0,0,.1)}
+    .jar::after{content:"";position:absolute;width:150px;height:10px;top:-10px;border-radius:10px;background:var(--yellow)}
+    .jar-icons{display:flex;align-items:center;gap:34px;margin-bottom:26px}
+    .coin{width:88px;height:88px;border-radius:50%;background:#ffeca5;display:grid;place-items:center;color:#c4931d;font-size:2rem;font-weight:900}
+    .heart{font-size:5.5rem;color:var(--coral);line-height:1}
+    .jar strong{font-family:'Gaegu',cursive;font-size:3.2rem;line-height:1}.jar small{color:#777;margin-top:10px}
+
+    .stats{background:var(--ink);color:white;padding:48px 20px}
+    .stats-title{text-align:center;color:var(--yellow);font-family:'Gaegu',cursive;font-size:1.7rem;margin-bottom:32px}
+    .stats-row{max-width:920px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr)}
+    .stat{text-align:center;padding:8px 20px;border-right:1px solid #555}.stat:last-child{border-right:0}
+    .stat strong{display:block;color:var(--yellow);font-family:'Gaegu',cursive;font-size:2.7rem;line-height:1;margin-bottom:10px}.stat span{font-size:.78rem;color:#ccc;line-height:1.6}
+
+    section{scroll-margin-top:72px}
+    .section{max-width:var(--max);margin:auto;padding:90px 20px}
+    .section-head{text-align:center;margin-bottom:46px}.label{color:var(--mint);font-weight:900;font-size:.74rem;letter-spacing:3px;margin-bottom:9px}.section-title{font-family:'Gaegu',cursive;font-size:clamp(2rem,4vw,3rem);line-height:1.25;margin-bottom:12px}.section-sub{color:#888;font-size:.93rem;line-height:1.8}
+
+    .journey-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .journey-card{background:white;border-radius:22px;padding:22px;box-shadow:var(--soft-shadow);position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s}
+    .journey-card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+    .journey-top{display:flex;align-items:center;gap:10px;margin-bottom:18px}.letter{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:white;font-family:'Gaegu',cursive;font-size:1.6rem}.journey-top strong{font-size:1.05rem}
+    .journey-photo{height:175px;border-radius:15px;overflow:hidden;background:#eee;margin-bottom:18px;cursor:zoom-in}.journey-photo img{width:100%;height:100%;object-fit:cover;transition:transform .3s}.journey-photo:hover img{transform:scale(1.04)}
+    .journey-card h3{font-family:'Gaegu',cursive;font-size:1.45rem;margin-bottom:8px}.journey-card p{color:#666;font-size:.86rem;line-height:1.75}
+    .c-d .letter{background:#ff8b70}.c-a .letter{background:#f4c64e}.c-t .letter{background:#61c59a}.c-act .letter{background:#5aade8}
+    .c-d{border-top:5px solid #ff8b70}.c-a{border-top:5px solid #f4c64e}.c-t{border-top:5px solid #61c59a}.c-act{border-top:5px solid #5aade8}
+
+    .criteria-wrap{background:white}.criteria-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}.criterion{border-radius:24px;padding:32px;min-height:250px;box-shadow:var(--soft-shadow)}
+    .criterion:nth-child(1){background:#fff6d8}.criterion:nth-child(2){background:#eaf7f3}.criterion:nth-child(3){background:#eaf4fb}
+    .criterion-head{display:flex;align-items:center;gap:14px;margin-bottom:24px}.criterion-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;color:white;font-weight:900;font-size:1.35rem}.criterion:nth-child(1) .criterion-icon{background:#f2bd37}.criterion:nth-child(2) .criterion-icon{background:#61c59a}.criterion:nth-child(3) .criterion-icon{background:#5aade8}
+    .criterion h3{font-family:'Gaegu',cursive;font-size:1.55rem}.criterion p{color:#555;line-height:1.9;font-size:.91rem}
+
+    .different{background:linear-gradient(180deg,#fffbf0,#fff8e8)}
+    .different-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:stretch}
+    .rule-stack{display:flex;flex-direction:column;gap:20px}.rule-card{background:white;border-radius:22px;padding:26px 28px;box-shadow:var(--soft-shadow);border:2px solid var(--rule)}
+    .rule-tag{display:inline-block;background:var(--soft);color:var(--rule-dark);padding:5px 14px;border-radius:100px;font-size:.72rem;font-weight:900;margin-bottom:14px}.rule-card h3{font-family:'Gaegu',cursive;font-size:1.52rem;margin-bottom:20px}
+    .mini-flow{display:flex;align-items:center;gap:13px;font-size:.82rem;font-weight:700}.rate{background:var(--rule);border-radius:100px;color:white;padding:7px 20px}.flow-arrow{height:2px;flex:1;background:#5f746e;position:relative}.flow-arrow::after{content:"";position:absolute;right:-1px;top:-5px;border-left:10px solid #5f746e;border-top:6px solid transparent;border-bottom:6px solid transparent}
+    .evidence-card{background:#f7f5ef;border-radius:26px;padding:26px;box-shadow:var(--shadow);display:flex;flex-direction:column}.evidence-card img{width:100%;height:360px;object-fit:cover;border-radius:18px;cursor:zoom-in}.evidence-card h3{font-family:'Gaegu',cursive;font-size:1.45rem;text-align:center;margin-top:22px}.evidence-card p{text-align:center;color:#888;font-size:.8rem;margin-top:7px}
+    .insight{margin-top:36px;background:#f0e8f5;border-radius:22px;padding:24px;text-align:center}.insight strong{display:block;font-family:'Gaegu',cursive;color:#40524e;font-size:1.65rem}.insight span{display:block;color:#777;font-size:.82rem;margin-top:6px;line-height:1.6}
+
+    .act-section{background:linear-gradient(130deg,#ffe3c8,#ffd0d0)}
+    .act-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}.proof,.act-card{border-radius:26px;box-shadow:var(--shadow);overflow:hidden}.proof{background:white;padding:28px;text-align:center}.proof img{width:100%;height:300px;object-fit:cover;border-radius:18px;cursor:zoom-in}.proof strong{font-family:'Gaegu',cursive;font-size:1.5rem;display:block;margin-top:18px}
+    .act-card{background:var(--ink);color:white;padding:42px}.act-card .label{color:var(--yellow);text-align:left}.act-card h3{font-family:'Gaegu',cursive;color:white;font-size:3.5rem;margin:8px 0}.act-card .lead{color:#ccc;margin-bottom:24px}.act-list{border-top:1px solid #555;padding-top:20px;display:grid;gap:15px}.act-list li{list-style:none;color:#eee;font-size:.9rem;line-height:1.7;padding-left:22px;position:relative}.act-list li::before{content:"";position:absolute;width:7px;height:7px;border-radius:50%;background:var(--yellow);left:0;top:.65em}
+
+    .vote-section{max-width:var(--max);margin:86px auto;padding:48px;border:3px solid var(--mint);background:white;border-radius:30px;box-shadow:var(--shadow);text-align:center}
+    .vote-options{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:30px 0 18px}.vote-btn{border:0;border-radius:100px;padding:15px 12px;cursor:pointer;font-weight:900;transition:transform .2s,box-shadow .2s,outline .2s}.vote-btn:nth-child(1){background:#fff1bc}.vote-btn:nth-child(2){background:#ddf5ea}.vote-btn:nth-child(3){background:#ddeffb}.vote-btn:nth-child(4){background:#ffdada}.vote-btn:hover{transform:translateY(-3px);box-shadow:var(--soft-shadow)}.vote-btn.selected{outline:4px solid var(--ink);outline-offset:3px}
+    .vote-message{min-height:28px;font-size:.86rem;color:#777}.vote-note{font-size:.76rem;color:#aaa;margin-top:7px}
+
+    .gallery{padding-top:50px}.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.gallery-item{background:white;border-radius:22px;overflow:hidden;box-shadow:var(--soft-shadow)}.gallery-item img{width:100%;height:270px;object-fit:cover;cursor:zoom-in;transition:transform .3s}.gallery-item:hover img{transform:scale(1.04)}.gallery-item p{padding:15px;text-align:center;color:#777;font-size:.82rem}
+    footer{background:var(--ink);color:#aaa;text-align:center;padding:38px 20px;line-height:1.9;font-size:.8rem}footer strong{color:white}
+    .to-top{position:fixed;right:24px;bottom:24px;width:48px;height:48px;border-radius:50%;border:0;background:var(--ink);color:white;cursor:pointer;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:.2s}.to-top.show{opacity:1;pointer-events:auto}
+    .reveal{opacity:1;transform:none}.js .reveal{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}.js .reveal.visible{opacity:1;transform:none}
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:4000;padding:26px;align-items:center;justify-content:center}.lightbox.open{display:flex}.lightbox img{max-width:94vw;max-height:90vh;border-radius:12px}.lightbox button{position:absolute;right:24px;top:20px;border:0;background:none;color:white;font-size:2rem;cursor:pointer}
+
+    @media(max-width:850px){
+      .nav-links{display:none}.hero-inner{grid-template-columns:1fr;text-align:center;padding-top:60px}.hero-copy{margin-left:auto;margin-right:auto}.jar{width:285px;height:300px;border-width:5px}.jar::before{width:185px;height:62px;top:-35px}.jar-icons{margin-top:25px}.coin{width:67px;height:67px}.heart{font-size:4.2rem}.jar strong{font-size:2.6rem}
+      .stats-row{grid-template-columns:1fr 1fr;gap:22px}.stat:nth-child(2){border-right:0}.journey-grid{grid-template-columns:1fr 1fr}.criteria-grid,.different-grid,.act-grid{grid-template-columns:1fr}.vote-options{grid-template-columns:1fr 1fr}.gallery-grid{grid-template-columns:1fr}.evidence-card img,.proof img{height:auto}
+    }
+    @media(max-width:520px){.hero-inner{padding:55px 18px}.stats-row{grid-template-columns:1fr}.stat{border-right:0;border-bottom:1px solid #555;padding:18px}.stat:last-child{border-bottom:0}.journey-grid{grid-template-columns:1fr}.criteria-grid{grid-template-columns:1fr}.section{padding:70px 16px}.vote-section{margin:60px 14px;padding:34px 18px}.vote-options{grid-template-columns:1fr}.act-card{padding:30px 24px}.mini-flow{flex-wrap:wrap}.flow-arrow{min-width:60px}.gallery{padding-top:30px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.js .reveal{opacity:1;transform:none;transition:none}*{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  <nav class="nav" aria-label="주요 메뉴">
+    <div class="nav-inner">
+      <a class="brand" href="#top"><span class="brand-heart">♥</span>DATA·ABLE ARCHIVE</a>
+      <div class="nav-links"><a href="#journey">우리의 여정</a><a href="#criteria">판단 기준</a><a href="#act">실제 기부</a><a href="#your-turn">6학년에게</a></div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <div>
+        <div class="kicker">4학년 BUDGET UNIT · 기부금 배분</div>
+        <h1>4학년은 왜 이곳에<br>기부했을까?</h1>
+        <p class="hero-copy">8개 캠페인의 데이터를 읽고, 기준을 만들고,<br>알고리즘을 고쳐 실제 기부하기까지의 기록입니다.</p>
+        <span class="hero-badge">🎁 6학년에게 공개하는 4학년 기부 유닛</span>
+      </div>
+      <div class="jar" aria-label="실제 기부금 44,600원">
+        <div class="jar-icons"><span class="coin">₩</span><span class="heart">♥</span></div>
+        <strong>44,600원</strong><small>우리의 기준으로 결정한 실제 기부</small>
+      </div>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="프로젝트 핵심 수치">
+    <h2 class="stats-title">📊 한눈에 보는 우리의 기부 프로젝트</h2>
+    <div class="stats-row">
+      <div class="stat"><strong>8개</strong><span>조사한 해피빈 캠페인</span></div>
+      <div class="stat"><strong>3가지</strong><span>도달률 · 남은 금액 · 마감일</span></div>
+      <div class="stat"><strong>2번</strong><span>이유를 나눈 뒤 다시 투표</span></div>
+      <div class="stat"><strong>44,600원</strong><span>실제로 전달한 기부금</span></div>
+    </div>
+  </section>
+
+  <main>
+    <section class="section" id="journey">
+      <div class="section-head reveal"><div class="label">OUR DATA JOURNEY</div><h2 class="section-title">마음에서 시작해, 기준을 거쳐, 행동으로</h2><p class="section-sub">기부처를 ‘느낌’으로 고르지 않고 D-A-T-A의 네 단계를 따라가 보았습니다.</p></div>
+      <div class="journey-grid">
+        <article class="journey-card c-d reveal"><div class="journey-top"><span class="letter">D</span><strong>Discover</strong></div><button class="journey-photo image-button" data-image="images/campaigns.png" aria-label="기부 캠페인 조사 화면 크게 보기"><img src="images/campaigns.png" alt="학생들이 조사한 해피빈 기부 캠페인 8개"></button><h3>기부 후보 만나기</h3><p>장애·아동·교육·생존 등 해피빈 캠페인 8개를 직접 살펴보았습니다.</p></article>
+        <article class="journey-card c-a reveal"><div class="journey-top"><span class="letter">A</span><strong>Analyze</strong></div><button class="journey-photo image-button" data-image="images/data-worksheet.jpg" aria-label="데이터 비교 활동지 크게 보기"><img src="images/data-worksheet.jpg" alt="기부 캠페인의 모금액과 도달률을 비교한 학생 활동지"></button><h3>숫자로 비교하기</h3><p>도달률·남은 금액·마감일을 표로 정리하고 우선순위를 비교했습니다.</p></article>
+        <article class="journey-card c-t reveal"><div class="journey-top"><span class="letter">T</span><strong>Talk</strong></div><button class="journey-photo image-button" data-image="images/rule-reflection.jpg" aria-label="알고리즘 성찰 기록 크게 보기"><img src="images/rule-reflection.jpg" alt="더 명확한 규칙으로 고쳐 쓴 학생 성찰 기록"></button><h3>기준을 설계하고 의심하기</h3><p>1차 투표 뒤 이유를 나누고 다시 투표하며, 같은 규칙에서도 결과가 갈리는 까닭을 토론했습니다.</p></article>
+        <article class="journey-card c-act reveal"><div class="journey-top"><span class="letter">A</span><strong>Act</strong></div><button class="journey-photo image-button" data-image="images/donation-proof.jpg" aria-label="실제 기부 완료 화면 크게 보기"><img src="images/donation-proof.jpg" alt="2026년 7월 실제 기부 완료 화면"></button><h3>실제로 기부하기</h3><p>순서도를 고쳐 최종 한 곳을 정하고 44,600원을 실제로 전달했습니다.</p></article>
+      </div>
+    </section>
+
+    <div class="criteria-wrap" id="criteria">
+      <section class="section">
+        <div class="section-head reveal"><div class="label">WHAT COUNTS AS FAIR?</div><h2 class="section-title">어떤 숫자를 먼저 볼 것인가?</h2><p class="section-sub">데이터는 답을 대신 정해주지 않았습니다. 무엇을 중요하게 볼지 우리가 선택해야 했습니다.</p></div>
+        <div class="criteria-grid">
+          <article class="criterion reveal"><div class="criterion-head"><span class="criterion-icon">%</span><h3>도달률</h3></div><p>목표 금액 중 얼마가 모였을까요?<br>높은 곳을 밀어줄지, 낮은 곳을 도와줄지 판단해야 했습니다.</p></article>
+          <article class="criterion reveal"><div class="criterion-head"><span class="criterion-icon">₩</span><h3>남은 금액</h3></div><p>목표까지 얼마나 더 필요할까요?<br>적은 금액으로도 목표를 완성할 수 있는 캠페인을 먼저 볼 수도 있습니다.</p></article>
+          <article class="criterion reveal"><div class="criterion-head"><span class="criterion-icon">D-</span><h3>마감일</h3></div><p>도움이 필요한 시간이 얼마나 남았을까요?<br>마감이 가까운 캠페인을 먼저 선택할 수도 있습니다.</p></article>
+        </div>
+      </section>
+    </div>
+
+    <div class="different">
+      <section class="section">
+        <div class="section-head reveal"><div class="label">SAME DATA, DIFFERENT CHOICE</div><h2 class="section-title">같은 자료를 보고도 선택이 달랐습니다</h2><p class="section-sub">‘도달률을 본다’는 규칙은 같았지만, 높은 곳과 낮은 곳 중 무엇을 우선할지는 달랐습니다.</p></div>
+        <div class="different-grid">
+          <div class="rule-stack">
+            <article class="rule-card reveal" style="--rule:#f4c64e;--soft:#fff0b8;--rule-dark:#8a6810"><span class="rule-tag">모둠의 기준 A</span><h3>“도달률이 높은 곳을 밀어주자”</h3><div class="mini-flow"><span class="rate">92%</span><span class="flow-arrow"></span><span>거의 다 모인 캠페인 선택</span></div></article>
+            <article class="rule-card reveal" style="--rule:#61c59a;--soft:#ddf5ea;--rule-dark:#31785d"><span class="rule-tag">모둠의 기준 B</span><h3>“도달률이 낮아 힘든 곳을 돕자”</h3><div class="mini-flow"><span class="rate">18%</span><span class="flow-arrow"></span><span>도움이 더 필요한 캠페인 선택</span></div></article>
+          </div>
+          <article class="evidence-card reveal"><button class="image-button" data-image="images/data-worksheet.jpg" aria-label="학생 데이터 비교 활동지 크게 보기"><img src="images/data-worksheet.jpg" alt="학생이 직접 비교한 기부 캠페인 데이터"></button><h3>학생이 직접 비교한 기부 캠페인 데이터</h3><p>도달률·모금액을 적고 우선순위를 판단한 활동지</p></article>
+        </div>
+        <div class="insight reveal"><strong>“알고리즘은 공정해 보이지만, 그 안에 무엇을 넣을지는 사람이 정한다.”</strong><span>같은 데이터와 같은 규칙에서도 판단 기준에 따라 결과가 달라질 수 있음을 발견했습니다.</span></div>
+      </section>
+    </div>
+
+    <div class="act-section" id="act">
+      <section class="section">
+        <div class="section-head reveal"><div class="label" style="color:#e55555">ACT · FROM DECISION TO ACTION</div><h2 class="section-title">우리가 정한 기준을 실제 행동으로</h2></div>
+        <div class="act-grid">
+          <article class="proof reveal"><button class="image-button" data-image="images/donation-proof.jpg" aria-label="기부 완료 화면 크게 보기"><img src="images/donation-proof.jpg" alt="2026년 7월 21일 기부금 44,600원 결제 완료 화면"></button><strong>2026년 7월 21일 · 실제 기부 완료</strong></article>
+          <article class="act-card reveal"><div class="label">우리의 ACT</div><h3>44,600원</h3><p class="lead">금액보다 더 중요했던 것</p><ul class="act-list"><li>플랫폼의 추천순을 그대로 따르지 않았습니다.</li><li>우리가 합의한 기준으로 최종 한 곳을 골랐습니다.</li><li>선택의 결과를 실제 기부로 책임졌습니다.</li></ul></article>
+        </div>
+      </section>
+    </div>
+
+    <section class="vote-section reveal" id="your-turn">
+      <div class="label">NOW, YOUR TURN</div><h2 class="section-title">6학년이라면 어떤 기준을 가장 먼저 보겠나요?</h2>
+      <div class="vote-options" role="group" aria-label="기부 기준 선택">
+        <button class="vote-btn" data-vote="low-rate">도달률이 낮은 곳</button><button class="vote-btn" data-vote="near-deadline">마감이 가까운 곳</button><button class="vote-btn" data-vote="small-gap">남은 금액이 적은 곳</button><button class="vote-btn" data-vote="urgent-need">도움이 가장 시급한 곳</button>
+      </div>
+      <p class="vote-message" id="vote-message" aria-live="polite">기준을 하나 골라보세요.</p><p class="vote-note">여러분의 선택은 마지막 ACT 공동수업에서 4학년의 기준과 비교해 봅니다.</p>
+    </section>
+
+    <section class="section gallery">
+      <div class="section-head reveal"><div class="label">CLASSROOM MOMENTS</div><h2 class="section-title">기준을 만들고, 설명하고, 다시 고친 순간들</h2></div>
+      <div class="gallery-grid">
+        <article class="gallery-item reveal"><button class="image-button" data-image="images/classroom-research.jpg" aria-label="캠페인 조사 수업 사진 크게 보기"><img src="images/classroom-research.jpg" alt="학생들이 기부 캠페인 데이터를 조사하는 수업 모습"></button><p>캠페인 데이터를 직접 조사하는 모습</p></article>
+        <article class="gallery-item reveal"><button class="image-button" data-image="images/classroom-talk.jpg" aria-label="판단 기준 발표 사진 크게 보기"><img src="images/classroom-talk.jpg" alt="학생이 자신의 판단 기준을 발표하는 수업 모습"></button><p>각자의 판단 기준을 발표하고 나누는 모습</p></article>
+        <article class="gallery-item reveal"><button class="image-button" data-image="images/flowchart-worksheet.jpg" aria-label="순서도 활동지 크게 보기"><img src="images/flowchart-worksheet.jpg" alt="학생이 알고리즘 순서도를 고쳐 쓴 활동지"></button><p>순서도를 고치며 기준을 구체화한 활동지</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>4학년 BUDGET UNIT · DATA·ABLE ARCHIVE</strong><br>데이터를 읽고 · 기준을 만들고 · 실제 세상에서 행동한 기록</footer>
+  <button class="to-top" id="to-top" aria-label="맨 위로">↑</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="이미지 크게 보기"><button id="lightbox-close" aria-label="닫기">×</button><img id="lightbox-image" src="" alt="확대 이미지"></div>
+
+  <script>
+    // 전체 학급 투표를 연동할 경우 배포한 Google Apps Script 웹앱 주소를 넣으세요.
+    const VOTE_API = '';
+    const voteLabels={
+      'low-rate':'도달률이 낮은 곳','near-deadline':'마감이 가까운 곳',
+      'small-gap':'남은 금액이 적은 곳','urgent-need':'도움이 가장 시급한 곳'
+    };
+
+    const progress=document.getElementById('progress');
+    const topButton=document.getElementById('to-top');
+    function onScroll(){
+      const max=document.documentElement.scrollHeight-innerHeight;
+      progress.style.width=(max>0?scrollY/max*100:0)+'%';
+      topButton.classList.toggle('show',scrollY>600);
+    }
+    addEventListener('scroll',onScroll,{passive:true});onScroll();
+    topButton.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
+
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}
+    }),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    const voteMessage=document.getElementById('vote-message');
+    const voteButtons=[...document.querySelectorAll('.vote-btn')];
+    const savedVote=localStorage.getItem('donationArchiveVote');
+    if(savedVote&&voteLabels[savedVote]) selectVote(savedVote,false);
+    voteButtons.forEach(button=>button.addEventListener('click',()=>selectVote(button.dataset.vote,true)));
+    function selectVote(value,send){
+      voteButtons.forEach(button=>button.classList.toggle('selected',button.dataset.vote===value));
+      localStorage.setItem('donationArchiveVote',value);
+      voteMessage.innerHTML=`나는 <strong>‘${voteLabels[value]}’</strong>을(를) 가장 먼저 보겠습니다.`;
+      if(send&&VOTE_API){
+        fetch(`${VOTE_API}?action=vote&choice=${encodeURIComponent(value)}`,{mode:'no-cors'}).catch(()=>{});
+      }
+    }
+
+    const lightbox=document.getElementById('lightbox');
+    const lightboxImage=document.getElementById('lightbox-image');
+    document.querySelectorAll('.image-button').forEach(button=>button.addEventListener('click',()=>{
+      lightboxImage.src=button.dataset.image;lightbox.classList.add('open');document.body.style.overflow='hidden';
+    }));
+    function closeLightbox(){lightbox.classList.remove('open');document.body.style.overflow='';lightboxImage.src=''}
+    document.getElementById('lightbox-close').addEventListener('click',closeLightbox);
+    lightbox.addEventListener('click',event=>{if(event.target===lightbox)closeLightbox()});
+    addEventListener('keydown',event=>{if(event.key==='Escape')closeLightbox()});
+  </script>
+</body>
+</html>
